@@ -1,13 +1,14 @@
+// Файл: classes/Student.java
 package classes;
 
 public class Student
 {
-    String surname;
-    String name;
-    int course;
-    long studentID;
-    String sex;
-    String location;
+    public String surname;
+    public String name;
+    public int course;
+    public long studentID;
+    public String sex;
+    public String location;
 
     public Student(String surname, String name, long studentID, int course, String sex, String location)
     {
@@ -26,5 +27,4 @@ public class Student
                 " | Course: " + course + " | StudentID: " + studentID +
                 " | Sex: " + sex + " | Location: " + location;
     }
-
 }

@@ -1,3 +1,4 @@
+// Файл: classes/BinaryTree.java
 package classes;
 
 import java.util.ArrayList;
@@ -60,9 +61,10 @@ public class BinaryTree
         {
             findRec(root.left, students);
 
+            // Змінено "Жінка" на перевірку обох варіантів: "Жінка" або "Дівчина"
             if (root.student.course == 1 &&
                     root.student.location.equals("Гуртожиток") &&
-                    root.student.sex.equals("Жінка"))
+                    (root.student.sex.equals("Жінка") || root.student.sex.equals("Дівчина")))
             {
                 students.add(root.student);
             }
@@ -78,21 +80,49 @@ public class BinaryTree
 
     private Node removeRec(Node root)
     {
-        if (root == null)
-        {
+        if (root == null) {
             return null;
         }
 
+        // Рекурсивно обрабатываем левое и правое поддерево
         root.left = removeRec(root.left);
         root.right = removeRec(root.right);
 
+        // Змінено "Жінка" на перевірку обох варіантів: "Жінка" або "Дівчина"
         if (root.student.course == 1 &&
                 root.student.location.equals("Гуртожиток") &&
-                root.student.sex.equals("Жінка"))
+                (root.student.sex.equals("Жінка") || root.student.sex.equals("Дівчина")))
         {
-            return null;
+            // Удаляем узел — обрабатываем три случая:
+
+            // 1. Узел не имеет детей (листья)
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+
+            // 2. Узел имеет только одного потомка
+            if (root.left == null) {
+                return root.right;
+            }
+            if (root.right == null) {
+                return root.left;
+            }
+
+            // 3. Узел имеет двух потомков
+            // Находим минимальный элемент в правом поддереве
+            Node minNode = findMin(root.right);
+            root.student = minNode.student;
+            root.right = removeRec(root.right);
         }
 
+        return root;
+    }
+
+    private Node findMin(Node root)
+    {
+        while (root.left != null) {
+            root = root.left;
+        }
         return root;
     }
 }
