@@ -1,4 +1,3 @@
-// Файл: classes/BinaryTree.java
 package classes;
 
 import java.util.ArrayList;
@@ -61,7 +60,6 @@ public class BinaryTree
         {
             findRec(root.left, students);
 
-            // Змінено "Жінка" на перевірку обох варіантів: "Жінка" або "Дівчина"
             if (root.student.course == 1 &&
                     root.student.location.equals("Гуртожиток") &&
                     (root.student.sex.equals("Жінка") || root.student.sex.equals("Дівчина")))
@@ -84,23 +82,18 @@ public class BinaryTree
             return null;
         }
 
-        // Рекурсивно обрабатываем левое и правое поддерево
         root.left = removeRec(root.left);
         root.right = removeRec(root.right);
 
-        // Змінено "Жінка" на перевірку обох варіантів: "Жінка" або "Дівчина"
         if (root.student.course == 1 &&
                 root.student.location.equals("Гуртожиток") &&
                 (root.student.sex.equals("Жінка") || root.student.sex.equals("Дівчина")))
         {
-            // Удаляем узел — обрабатываем три случая:
 
-            // 1. Узел не имеет детей (листья)
             if (root.left == null && root.right == null) {
                 return null;
             }
 
-            // 2. Узел имеет только одного потомка
             if (root.left == null) {
                 return root.right;
             }
@@ -108,8 +101,6 @@ public class BinaryTree
                 return root.left;
             }
 
-            // 3. Узел имеет двух потомков
-            // Находим минимальный элемент в правом поддереве
             Node minNode = findMin(root.right);
             root.student = minNode.student;
             root.right = removeRec(root.right);

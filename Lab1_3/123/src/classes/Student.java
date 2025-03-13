@@ -1,4 +1,3 @@
-// Файл: classes/Student.java
 package classes;
 
 public class Student
