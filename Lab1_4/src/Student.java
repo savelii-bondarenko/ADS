@@ -1,4 +1,4 @@
-﻿class Student {
+class Student {
     String lastName;
     String firstName;
     String subject;
