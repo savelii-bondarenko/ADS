@@ -28,26 +28,28 @@ class BST {
     private Node balance(Node node) {
         int balanceFactor = height(node.left) - height(node.right);
 
-        if (balanceFactor > 1) {
-            if (height(node.left.left) >= height(node.left.right)) {
-                node = rotateRight(node);
-            } else {
-                node.left = rotateLeft(node.left);
-                node = rotateRight(node);
-            }
+        if (balanceFactor < -1 && node.right != null && height(node.right.right) >= height(node.right.left)) {
+            return rotateLeft(node);
         }
 
-        if (balanceFactor < -1) {
-            if (height(node.right.right) >= height(node.right.left)) {
-                node = rotateLeft(node);
-            } else {
-                node.right = rotateRight(node.right);
-                node = rotateLeft(node);
-            }
+        if (balanceFactor > 1 && node.left != null && height(node.left.left) >= height(node.left.right)) {
+            return rotateRight(node);
+        }
+
+        if (balanceFactor > 1 && node.left != null && height(node.left.right) > height(node.left.left)) {
+            node.left = rotateLeft(node.left);
+            return rotateRight(node);
+        }
+
+        if (balanceFactor < -1 && node.right != null && height(node.right.left) > height(node.right.right)) {
+            node.right = rotateRight(node.right);
+            return rotateLeft(node);
         }
 
         return node;
     }
+
+
 
     private int height(Node node) {
         if (node == null) {
