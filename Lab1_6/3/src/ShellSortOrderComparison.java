@@ -60,6 +60,16 @@ public class ShellSortOrderComparison {
         return array;
     }
 
+    public static void warmUp(int[] originalArray, int repeats, boolean useKnuth) {
+        for (int i = 0; i < repeats; i++) {
+            int[] arrayToSort = Arrays.copyOf(originalArray, originalArray.length);
+            if (useKnuth) {
+                shellSortKnuth(arrayToSort);
+            } else {
+                shellSortClassic(arrayToSort);
+            }
+        }
+    }
 
     public static long measureAverageTime(int[] originalArray, int repeats, boolean useKnuth) {
         long totalTime = 0;
@@ -91,6 +101,10 @@ public class ShellSortOrderComparison {
         int[] worstArray = generateReverseSortedArray(N);
         int[] averageArray = generateRandomArray(N, random);
 
+        System.out.println("Прогрівання JVM...");
+        warmUp(bestArray, REPEATS, false);
+        warmUp(bestArray, REPEATS, true);
+
         long timeBestClassic = measureAverageTime(bestArray, REPEATS, false);
         long timeWorstClassic = measureAverageTime(worstArray, REPEATS, false);
         long timeAverageClassic = measureAverageTime(averageArray, REPEATS, false);
@@ -103,6 +117,5 @@ public class ShellSortOrderComparison {
         System.out.printf("Найкращий | %.3f | %.3f%n", timeBestClassic / TO_MILLIS, timeBestKnuth / TO_MILLIS);
         System.out.printf("Найгірший | %.3f | %.3f%n", timeWorstClassic / TO_MILLIS, timeWorstKnuth / TO_MILLIS);
         System.out.printf("Середній  | %.3f | %.3f%n", timeAverageClassic / TO_MILLIS, timeAverageKnuth / TO_MILLIS);
-
     }
 }
