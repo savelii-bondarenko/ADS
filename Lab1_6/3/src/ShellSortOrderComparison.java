@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ShellSortOrderComparison {
-    static final double TO_MILLIS = 1_000_000.0;
+    static final double TO_MILLIS = 1_000_000;
 
     public static void shellSortClassic(int[] array) {
         int n = array.length;
@@ -54,8 +54,8 @@ public class ShellSortOrderComparison {
 
     public static int[] generateReverseSortedArray(int size) {
         int[] array = new int[size];
-        for (int i = size - 1; i >= 0; i--) {
-            array[i] = i;
+        for (int i = 0; i < size; i++) {
+            array[i] = size - i;
         }
         return array;
     }
@@ -65,22 +65,27 @@ public class ShellSortOrderComparison {
         long totalTime = 0;
         for (int i = 0; i < repeats; i++) {
             int[] arrayToSort = Arrays.copyOf(originalArray, originalArray.length);
-            long start = System.nanoTime();
+            long start;
+            long end;
             if (useKnuth) {
+                start = System.nanoTime();
                 shellSortKnuth(arrayToSort);
+                end = System.nanoTime();
             } else {
+                start = System.nanoTime();
                 shellSortClassic(arrayToSort);
+                end = System.nanoTime();
             }
-            long end = System.nanoTime();
+
             totalTime += (end - start);
         }
         return totalTime / repeats;
     }
 
     public static void main(String[] args) {
-        final int N = 10000;
+        final int N = 1_000_000;
         final int REPEATS = 5;
-        Random random = new Random(42);
+        Random random = new Random(1);
 
         int[] bestArray = generateSortedArray(N);
         int[] worstArray = generateReverseSortedArray(N);
