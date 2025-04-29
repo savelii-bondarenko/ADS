@@ -98,7 +98,7 @@ public class ShellSortOrderComparison {
         Random random = new Random(1);
 
         int[] bestArray = generateSortedArray(N);
-        int[] worstArray = generateReverseSortedArray(N);
+        int[] worstArray = gјenerateReverseSortedArray(N);
         int[] averageArray = generateRandomArray(N, random);
 
         System.out.println("Прогрівання JVM...");
