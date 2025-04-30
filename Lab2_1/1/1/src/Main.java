@@ -4,7 +4,7 @@ public class Main {
         return 0.5 * Math.exp(Math.sqrt(1 + 2 * x));
     }
 
-    public static double rectangleMethod(double a, double b, double h) {
+    public static double leftRectangleMethod(double a, double b, double h) {
         double sum = 0.0;
         for (double x = a; x < b; x += h) {
             sum += f(x);
@@ -12,7 +12,23 @@ public class Main {
         return sum * h;
     }
 
-    public static double trapeciaMethod(double a, double b, double h) {
+    public static double rightRectangleMethod(double a, double b, double h) {
+        double sum = 0.0;
+        for (double x = a + h; x <= b; x += h) {
+            sum += f(x);
+        }
+        return sum * h;
+    }
+
+    public static double middleRectangleMethod(double a, double b, double h) {
+        double sum = 0.0;
+        for (double x = a + h / 2; x < b; x += h) {
+            sum += f(x);
+        }
+        return sum * h;
+    }
+
+    public static double trapeziaMethod(double a, double b, double h) {
         double sum = 0.5 * (f(a) + f(b));
         for (double x = a + h; x < b; x += h) {
             sum += f(x);
@@ -38,14 +54,18 @@ public class Main {
     public static void main(String[] args) {
         double a = 1.0;
         double b = 2.0;
-        double h = 0.2;
+        double h = 0.002;
 
-        double rect = rectangleMethod(a, b, h);
-        double trap = trapeciaMethod(a, b, h);
+        double left = leftRectangleMethod(a, b, h);
+        double right = rightRectangleMethod(a, b, h);
+        double middle = middleRectangleMethod(a, b, h);
+        double trap = trapeziaMethod(a, b, h);
         double simp = simpsonMethod(a, b, h);
 
-        System.out.printf("Метод прямокутників: %.6f\n", rect);
-        System.out.printf("Метод трапецій: %.6f\n", trap);
-        System.out.printf("Метод Сімпсона: %.6f\n", simp);
+        System.out.printf("Метод лівих прямокутників:     %.6f\n", left);
+        System.out.printf("Метод правих прямокутників:    %.6f\n", right);
+        System.out.printf("Метод середніх прямокутників:  %.6f\n", middle);
+        System.out.printf("Метод трапецій:                %.6f\n", trap);
+        System.out.printf("Метод Сімпсона:                %.6f\n", simp);
     }
 }

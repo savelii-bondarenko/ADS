@@ -18,10 +18,9 @@ public class Main {
         if (Math.abs(f(b)) < eps) return b;
 
         double c = a;
-        while ((b - a) / 2 > eps) {
+        while (Math.abs(f(c)) > eps) {
             c = (a + b) / 2;
-            if (f(c) == 0.0) break;
-            else if (f(c) * f(a) < 0) b = c;
+            if (f(c) * f(a) < 0) b = c;
             else a = c;
         }
         return c;
@@ -57,16 +56,24 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        double a = 0.0;
-        double b = 1.0;
         double eps = 1e-6;
 
-        double rootBisection = bisection(a, b, eps);
-        double rootNewton = newton(0.5, eps);
-        double rootSecant = secant(a, b, eps);
+        double root1Bisection = bisection(-1.0, 0.0, eps);
+        double root1Newton = newton(-0.5, eps);
+        double root1Secant = secant(-1.0, 0.0, eps);
 
-        System.out.printf("Корінь (метод бісекції): %.6f\n", rootBisection);
-        System.out.printf("Корінь (метод Ньютона): %.6f\n", rootNewton);
-        System.out.printf("Корінь (метод хорд): %.6f\n", rootSecant);
+        double root2Bisection = bisection(1.0, 2.0, eps);
+        double root2Newton = newton(1.5, eps);
+        double root2Secant = secant(1.0, 2.0, eps);
+
+        System.out.println("Перший корінь (на [-1, 0]):");
+        System.out.printf("  Бісекція: %.6f\n", root1Bisection);
+        System.out.printf("  Ньютон:   %.6f\n", root1Newton);
+        System.out.printf("  Хорд:     %.6f\n", root1Secant);
+
+        System.out.println("\nДругий корінь (на [1, 2]):");
+        System.out.printf("  Бісекція: %.6f\n", root2Bisection);
+        System.out.printf("  Ньютон:   %.6f\n", root2Newton);
+        System.out.printf("  Хорд:     %.6f\n", root2Secant);
     }
 }
