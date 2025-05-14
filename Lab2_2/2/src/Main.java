@@ -24,48 +24,31 @@ public class Main {
 
             switch (state) {
                 case 0:
-                    if (c == '<') {
-                        state = 1;
-                    } else {
-                        return false;
-                    }
+                    if (c == '<') { state = 1; }
+                    else {return false;}
                     break;
 
                 case 1:
-                    if (c == '+' || c == '-') {
-                        state = 2;
-                    } else if (c >= 'P' && c <= 'Z') {
-                        state = 4;
-                    } else {
-                        return false;
-                    }
+                    if (c == '+' || c == '-') { state = 2; }
+                    else if (c >= 'P' && c <= 'Z') { state = 4; }
+                    else {return false;}
                     break;
 
                 case 2:
-                    if (c >= '0' && c <= '5') {
-                        state = 3;
-                    } else {
-                        return false;
-                    }
+                    if (c >= '0' && c <= '5') { state = 3; }
+                    else {return false;}
                     break;
 
                 case 3:
-                    if (c >= '0' && c <= '5') {
-                    } else if (c == '>') {
-                        state = 6;
-                    } else {
-                        return false;
-                    }
+                    if (c >= '0' && c <= '5') {}
+                    else if (c == '>') { state = 6; }
+                    else {return false;}
                     break;
 
                 case 4:
-                    if (c >= 'P' && c <= 'Z') {
-                        state = 4;
-                    } else if (c == '>') {
-                        state = 5;
-                    } else {
-                        return false;
-                    }
+                    if (c >= 'P' && c <= 'Z') {}
+                    else if (c == '>') { state = 5; }
+                    else { return false; }
                     break;
 
                 case 5:
