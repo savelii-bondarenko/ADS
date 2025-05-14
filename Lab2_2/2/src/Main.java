@@ -40,13 +40,13 @@ public class Main {
                     break;
 
                 case 3:
-                    if (c >= '0' && c <= '5') {continue;}
-                    else if (c == '>') { state = 6; }
+                    if (c >= '0' && c <= '5') {}
+                    else if (c == '>') { state = 5; }
                     else {return false;}
                     break;
 
                 case 4:
-                    if (c >= 'P' && c <= 'Z') {continue;}
+                    if (c >= 'P' && c <= 'Z') {}
                     else if (c == '>') { state = 5; }
                     else { return false; }
                     break;
@@ -60,6 +60,6 @@ public class Main {
             i++;
         }
 
-        return state == 6;
+        return state == 5;
     }
 }
