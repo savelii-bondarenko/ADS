@@ -1,10 +1,10 @@
 import java.io.*;
 import java.nio.file.*;
 
-public class WordMatcher {
+public class Main {
     public static void main(String[] args) {
         String fileName = "/Users/saveliibondarenko/Documents/ADS/Lab2_2/1/src/text";
-        String regex = "^<[-+].*";
+        String regex = "^<([-+][0-5]+|[-+][P-Z]+)>$";
 
         System.out.println("Знайдені слова:");
         try {

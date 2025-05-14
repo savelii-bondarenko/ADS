@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class FiniteAutomatonParser {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введіть рядок: ");
@@ -52,7 +52,7 @@ public class FiniteAutomatonParser {
                 case 3:
                     if (c >= '0' && c <= '5') {
                     } else if (c == '>') {
-                        state = 6;  // Завершуємо, якщо зустріли >
+                        state = 6;
                     } else {
                         return false;
                     }
@@ -62,13 +62,13 @@ public class FiniteAutomatonParser {
                     if (c >= 'P' && c <= 'Z') {
                         state = 4;
                     } else if (c == '>') {
-                        state = 6;
+                        state = 5;
                     } else {
                         return false;
                     }
                     break;
 
-                case 6:
+                case 5:
                     return false;
 
                 default:
